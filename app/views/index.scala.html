@@ -1,0 +1,34 @@
+@(studentForm: Form[views.formdata.StudentFormData],
+  hobbies: Map[String,Boolean],
+  levels: List[String],
+  gpa: Map[String,Boolean],
+  majors: Map[String,Boolean])(implicit flash: Flash)
+
+@import helper._
+
+@main("Index") {
+<div class="container">
+  <div class="well">
+
+    @form(routes.Application.postIndex(), 'class -> "form-horizontal") {
+      @fieldset(studentForm, hobbies, levels, gpa, majors)
+    }
+  </div>
+
+  @if(flash.get("success").isDefined) {
+  <div class="well">
+    <div id="success-message" class="text-success">
+      @flash.get("success")
+    </div>
+  </div>
+  }
+  @if(flash.get("error").isDefined) {
+  <div class="well">
+    <div id="error-message" class="text-danger">
+      @flash.get("error")
+  </div>
+    </div>
+  }
+</div>
+
+}
